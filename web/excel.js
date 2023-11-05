@@ -1,23 +1,34 @@
+// // *********************************************Button excel import
 const realFileBtn = document.getElementById("real-file-excel");
 const excelFileBtn = document.getElementById("import-excel");
 const choosedFile = document.getElementById("imported-excel");
 const commenrDivisionBouton = document.getElementById("division-excel-button");
+var file_path = ""
 
-// // *********************************************Button excel import
+async function getFileName() {
+  try {
+    file_path = await eel.select_and_send_excel_path()();
 
-excelFileBtn.addEventListener("click", function() {
-  realFileBtn.click()
-});
+    if (file_path) {
+      const pathSeparator = file_path.includes("\\") ? "\\" : "/";
+      const parts = file_path.split(pathSeparator);
+      const fileName = parts[parts.length - 1];
+      return fileName;
+    }
 
-realFileBtn.addEventListener("change", function(){
-  if (realFileBtn.value){
-    const fullPath = realFileBtn.value;
-    const pathSeparator = fullPath.includes("\\") ? "\\" : "/"; // Vérifie le séparateur de chemin en fonction de la plateforme
-    const parts = fullPath.split(pathSeparator); // Divise le chemin en parties
-    const fileName = parts[parts.length - 1]; // Obtient le dernier élément du tableau, qui est le nom du fichier    
+  } catch (error) {
+    console.error("Erreur : " + error);
+  }
+  return "";
+}
+
+// Écoute le clic sur excelFileBtn et exécute la fonction getFilePath
+excelFileBtn.addEventListener("click", async function() {
+  const NomFichier = await getFileName();
+  if (NomFichier != "") {
     choosedFile.removeAttribute("hidden");
     excelFileBtn.setAttribute("hidden", "hidden");
-    choosedFile.querySelector("span").innerHTML = fileName;
+    choosedFile.querySelector("span").innerHTML = NomFichier;
     commenrDivisionBouton.style.backgroundColor = "#009dcc";
     commenrDivisionBouton.style.color = "#ffff";
     commenrDivisionBouton.disabled = false;
@@ -36,29 +47,18 @@ choosedFile.addEventListener("click", function(){
 });
 
 // *********************************************Button division
-// // test
-
-// commenrDivisionBouton.addEventListener("click", function() {
-//     eel.hello_from_python();
-// });
-
-// JavaScript (Côté client)
-eel.expose(divisionExcel);
 
 function divisionExcel() {
-  // Récupérer le fichier Excel
-  const excelFile = realFileBtn.value
+  // Envoyer le nom du fichier au backend Python
 
-  // Créer un objet FormData pour envoyer le fichier au backend Python
-  // const formData = new FormData();
-  // formData.append("excelFile", excelFile);
-
-  // Envoyer le fichier au backend Python
-  eel.division_excel(excelFile);
+  eel.division_excel(file_path);
 }
 
 // Soumettre le formulaire en utilisant Eel
-commenrDivisionBouton.addEventListener("click", (e) => {
-  e.preventDefault();
+commenrDivisionBouton.addEventListener("click", function() {
+  console.log(file_path)
   divisionExcel();
 });
+
+
+
