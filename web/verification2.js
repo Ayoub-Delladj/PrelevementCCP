@@ -172,8 +172,7 @@ commenrVerificationButton.addEventListener('click', function() {
     colonnetraite2=colonnetraite2
     }
 
-  
-  eel.verification_compte(file_path, file_path2)
+  eel.verification_compte(file_path, Pagetraite1, colonnetraite1, file_path2, Pagetraite2, colonnetraite2);
 
 });
 

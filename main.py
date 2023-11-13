@@ -212,23 +212,23 @@ def color_rows(ws, nb_columns, indexes, color):
 
 
 @eel.expose
-def verification_compte(excel_path, situation_compte_path):
+def verification_compte(excel_path, nom_feuille1, colonne1, situation_compte_path, nom_feuille2, colonne2):
     try:
         output_path = '/'.join(excel_path.split('/')[:-1])
         file_name = excel_path.split('/')[-1].split('.')[0]
         file_extention = excel_path.split('/')[-1].split('.')[-1]
 
-        df_croise = pd.read_excel(excel_path)
-        df_situation = pd.read_excel(situation_compte_path)
+        df_croise = pd.read_excel(excel_path, nom_feuille1)
+        df_situation = pd.read_excel(situation_compte_path, nom_feuille2)
 
         column_compte = ''
         for column in df_croise.columns:
-            if column.lower().strip() == 'compte':
+            if column.lower().strip() == colonne1:
                 column_compte = column
                 break
         column_nb_compte = ''
         for column in df_situation.columns:
-            if column.lower().strip() == 'numero de compte':
+            if column.lower().strip() == colonne2:
                 column_nb_compte = column
                 break  
         
