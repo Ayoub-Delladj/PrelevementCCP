@@ -1,2 +1,1 @@
-# PrelevementCCP
-Prélèvement CCP AL SALAM BANK
+# ccp_p
