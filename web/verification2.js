@@ -120,7 +120,7 @@ documentFileBtn.addEventListener("click", async function() {
       }
   }
   else {
-    documentFileBtn.innerHTML = '<i class="fa-regular fa-file image-icon"></i></i><br>Importer un document';
+    documentFileBtn.innerHTML = '<i class="fa-regular fa-file-excel excel-icon"></i><br>Importer la situation des comptes';
   }
 });
 
@@ -136,7 +136,8 @@ choosedDocuement.addEventListener("click", function(){
 
 
 
-commenrVerificationButton.addEventListener('click', function() {
+commenrVerificationButton.addEventListener('click', async function() {
+
   const loadingPopup = document.getElementById("loading-popup");
   loadingPopup.style.display = "block";
   showLoadingPopup();
@@ -173,8 +174,10 @@ commenrVerificationButton.addEventListener('click', function() {
     }
 
   eel.verification_compte(file_path, Pagetraite1, colonnetraite1, file_path2, Pagetraite2, colonnetraite2);
-
+  
 });
+
+
 
 
 // *********************************************Button excel (automatique)
@@ -238,7 +241,7 @@ function close_loading_popup(chemin_telechargement, nom_fichier) {
   hideLoadingPopup();
   telechargerFichierBouton.style.backgroundColor = "#009dcc";
   telechargerFichierBouton.style.color = "#ffff";
-  telechargerFichierBouton.innerHTML = '<i class="fa-solid fa-download"></i> Télécharger le fichier segmenté';
+  telechargerFichierBouton.innerHTML = '<i class="fa-solid fa-download"></i> Télécharger le fichier';
   telechargerFichierBouton.disabled = false;
   telechargement_path = chemin_telechargement;
   nom_du_fichier = nom_fichier;

@@ -4,6 +4,9 @@ const choosedFile = document.getElementById("imported-excel");
 const commenrVerificationButton = document.getElementById("test");
 const downloadButton = document.getElementById("dowload-button");
 
+let telechargement_path = '';
+let nom_du_fichier = '';
+
 // *********************************************Button excel
 
 var file_path_excl = ""
@@ -120,14 +123,32 @@ commenrVerificationButton.addEventListener('click', function() {
   loadingPopup.style.display = "block";
   showLoadingPopup();
 
-  eel.verification_CCP(file_path_excl, file_path_img);
+  var NomFeuil = document.getElementById('nomPageExcel_1').value;
+  var Colonne = document.getElementById('nomColonneExcel1').value;
+
+  if (NomFeuil.trim() === '') {
+    NomFeuil='Feuil1';
+    }
+  else{
+    NomFeuil=NomFeuil;
+    }
+  if (Colonne.trim() === '') {
+    Colonne='CompteA';
+    }
+  else{
+    Colonne=Colonne;
+    }
+
+  eel.main(file_path_excl, file_path_img, NomFeuil, Colonne);
 
 });
+
+
 
 //*********************************affichage du résultat */
 eel.expose(close_loading_popup); // Expose la fonction pour être appelée depuis Python
 
-function close_loading_popup(df) {
+function close_loading_popup(chemin_telechargement, nom_fichier, df) {
   if (df) {
     console.log(df);
     const loadingPopup = document.getElementById("loading-popup");
@@ -137,8 +158,10 @@ function close_loading_popup(df) {
     document.getElementById("dataframe-row").removeAttribute("hidden");
     downloadButton.style.backgroundColor = "#009dcc";
     downloadButton.style.color = "#ffff";
-    downloadButton.innerHTML = '<i class="fa-solid fa-download"></i> Télécharger le fichier segmenté';
+    downloadButton.innerHTML = '<i class="fa-solid fa-download"></i> Exporter au format excel';
     downloadButton.disabled = false;
+    telechargement_path = chemin_telechargement;
+    nom_du_fichier = nom_fichier;
   }
   else {
     console.log(df);
@@ -164,12 +187,12 @@ const errorPopup = document.getElementById("error-popup");
 
 downloadButton.addEventListener("click", async function() {
   var folder_path = await eel.select_and_send_folder_path()();
-  // const downloaded_path = await eel.telecharger_fichier(nom_du_fichier, telechargement_path, folder_path)();
+  const downloaded_path = await eel.telecharger_fichier(nom_du_fichier, telechargement_path, folder_path)();
   downloadPopup.style.display = "block";
-  // document.getElementById("chemin-a-remplir").innerHTML = downloaded_path;
+  document.getElementById("chemin-a-remplir").innerHTML = downloaded_path;
   downloadButton.style.backgroundColor = "#75bb41";
   downloadButton.style.color = "#ffff";
-  downloadButton.innerHTML = '<i class="fa-solid fa-check"></i>  Téléchargement effectué';
+  downloadButton.innerHTML = '<i class="fa-solid fa-check"></i>  Exportation effectué';
 });
 
 closePopupButton.addEventListener("click", function() {

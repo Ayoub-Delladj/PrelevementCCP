@@ -59,10 +59,13 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-6">
-                      <button id="import-excel" class="btn-import2">
+                      <label for="nomPageExcel"  class="text-left  w-100" style="font-size: small;">Nom de la feuille excel à traitée  :</label>
+                      <input type="text" class="form-control  w-100" id="nomPageExcel_1" placeholder="Par défaut : 'Feuil1'" style="font-size: x-small;">
+                      <label for="nomColonneExcel"  class="text-left  w-100"></label>
+                      <button id="import-excel" class="btn-import2" style="margin-bottom: 10px;">
                         <i class="fa-regular fa-file-excel excel-icon"></i>
                         <br>Importer fichier Excel </button>
-                      <button id="imported-excel" class="btn-import2" style="position: relative;" hidden="hidden">
+                      <button id="imported-excel" class="btn-import2" style="position: relative; margin-bottom: 10px;" hidden="hidden">
                         <i class="fa-regular fa-file-excel excel-icon"></i>
                         <i class="fa-solid fa-trash-can" style="color: red; position: absolute; top: 20px; right: 20px; font-size: large;"></i>
                         <br>
@@ -70,14 +73,17 @@
                       </button>
                     </div>
                     <div class="col-md-6">
-                      <button id="import-image" class="btn-import2">
+                      <label for="nomColonne"  class="text-left  w-100" style="font-size: small;">Nom de la Colonne à traitée  :</label>
+                      <input type="text" class="form-control  w-100" id="nomColonneExcel1" placeholder="Par défaut : 'CompteA'" style="font-size: x-small;">
+                      <label for="nomColonneExcel"  class="text-left  w-100"></label>
+                      <button id="import-image" class="btn-import2" style="margin-bottom: 10px;">
                         <i class="fa-regular fa-images image-icon"></i>
                         <br>Importer les images </button>
-                      <button id="imported-image" class="btn-import2" style="position: relative;" hidden="hidden">
+                      <button id="imported-image" class="btn-import2" style="position: relative; margin-bottom: 10px;" hidden="hidden">
                         <i class="fa-regular fa-images image-icon"></i>
                         <i class="fa-solid fa-trash-can" style="color: red; position: absolute; top: 20px; right: 20px; font-size: large;"></i>
                         <br>
-                        <span>Image</span>
+                        <span>Images</span>
                       </button>
                     </div>
                     <!-- -->
@@ -88,12 +94,12 @@
                     </div>
                     <div id="error-popup" class="popup">
                       <button id="close-popup-button2" class="close-button">&times;</button>
-                      <p>Une erreur est survenu lors de la division du fichier séléctionner, veuillez choisir un fichier valide.</p>
+                      <p>Une erreur est survenu lors de la vérification des comptes en utilisant les fichiers séléctionnés, veuillez choisir des fichiers valides.</p>
                       <br><i class="fa-solid fa-xmark", style="color: #e8300c; font-size: xx-large; margin-top: 20px;"></i>
                     </div>
                     <div id="download-popup" class="popup">
                       <button id="close-popup-button" class="close-button">&times;</button>
-                      <p>Votre fichier contenant les comptes vérifiés est prêt.</p>
+                      <p>L'exportation des comptes au format Excel s'est déroulée avec succès.</p>
                       <br>
                       <p>Le chemin pour y accéder :</p>
                       <span id="chemin-a-remplir"></span>
@@ -115,7 +121,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Comptes à vérifier manuellement :</h5>
-                <div class="table-responsive" style="max-height: 220px; overflow-y: auto; font-size: small;">
+                <div class="table-responsive" style="max-height: 200px; overflow-y: auto; font-size: small;">
                   <table class="table table-bordered">
                       <!-- Le contenu du DataFrame sera injecté ici par JavaScript -->
                   </table>

@@ -73,42 +73,26 @@ function divisionExcel() {
   var lignesParPage = document.getElementById('lignesParPage').value;
   var lignesParPagetraite = document.getElementById('nomPageExcel_traite').value;
   if (lignesParPagetraite.trim() === '') {
-    lignesParPagetraite='Feuil1'
+    lignesParPagetraite='Feuil1';
   }
   else{
-    lignesParPagetraite=lignesParPagetraite
+    lignesParPagetraite=lignesParPagetraite;
   }
   // Vérifier si les champs sont vides
   if (nomPage.trim() === '') {
     if (lignesParPage.trim() === '') {
-      eel.division_excel(file_path,'BATCH',971,lignesParPagetraite).then(() => {
-        // Cacher le pop-up de chargement une fois la division terminée
-        loadingPopup.style.display = "none";
-        hideLoadingPopup();
-      });
+      eel.division_excel(file_path,'BATCH',971,lignesParPagetraite);
     }
     else {
-      eel.division_excel(file_path, 'BATCH', lignesParPage,lignesParPagetraite).then(() => {
-        // Cacher le pop-up de chargement une fois la division terminée
-        loadingPopup.style.display = "none";
-        hideLoadingPopup();
-      });
+      eel.division_excel(file_path, 'BATCH', lignesParPage,lignesParPagetraite);
     }
   }
   else {
     if (lignesParPage.trim() === '') {
-      eel.division_excel(file_path, page_name=nomPage,971,lignesParPagetraite).then(() => {
-        // Cacher le pop-up de chargement une fois la division terminée
-        loadingPopup.style.display = "none";
-        hideLoadingPopup();
-      });
+      eel.division_excel(file_path, page_name=nomPage,971,lignesParPagetraite);
     }
     else {
-      eel.division_excel(file_path, nomPage, lignesParPage,971,lignesParPagetraite).then(() => {
-        // Cacher le pop-up de chargement une fois la division terminée
-        loadingPopup.style.display = "none";
-        hideLoadingPopup();
-      });
+      eel.division_excel(file_path, nomPage, lignesParPage,971,lignesParPagetraite);
     }
   }
        
@@ -119,9 +103,11 @@ commenrDivisionBouton.addEventListener("click", function() {
   divisionExcel(); 
 });
 
+
 eel.expose(close_loading_popup); // Expose la fonction pour être appelée depuis Python
 
 function close_loading_popup(chemin_telechargement, nom_fichier) {
+  console.log('closing popup');
   const loadingPopup = document.getElementById("loading-popup");
   loadingPopup.style.display = "none";
   hideLoadingPopup();
